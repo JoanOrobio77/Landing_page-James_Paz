@@ -1,0 +1,758 @@
+/* ===== Variables ===== */
+:root {
+    --gold: #d4af37;
+    --gold-light: #e8c84a;
+    --gold-dark: #b8962e;
+    --gold-glow: rgba(212, 175, 55, 0.4);
+    --gold-glow-soft: rgba(212, 175, 55, 0.15);
+    --gold-glow-subtle: rgba(212, 175, 55, 0.08);
+    --particle-gold: rgba(212, 175, 55, 0.35);
+    --particle-white: rgba(255, 255, 255, 0.12);
+    --bg-black: #0a0a0a;
+    --bg-dark: #0f0f0f;
+    --bg-card: #141414;
+    --text-primary: #f5f5f5;
+    --text-secondary: #a8a8a8;
+    --text-muted: #6b6b6b;
+}
+
+/* ===== Reset & Base ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-black);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ===== Section Titles ===== */
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 400;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.08em;
+    text-transform: none;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    letter-spacing: 0.04em;
+}
+
+.btn-glow {
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 20px var(--gold-glow-soft);
+}
+
+.btn-glow:hover {
+    background: var(--gold);
+    color: var(--bg-black);
+    box-shadow: 0 0 40px var(--gold-glow), 0 0 60px var(--gold-glow-soft);
+    transform: translateY(-2px);
+}
+
+.btn-card {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+}
+
+.btn-card:hover {
+    background: var(--gold-glow-subtle);
+    box-shadow: 0 0 25px var(--gold-glow-soft);
+}
+
+.btn-paypal {
+    background: linear-gradient(135deg, #003087 0%, #009cde 100%);
+    color: #fff;
+}
+
+.btn-paypal:hover {
+    box-shadow: 0 0 30px rgba(0, 156, 222, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-paypal svg {
+    flex-shrink: 0;
+}
+
+.btn-whatsapp {
+    background: #25D366;
+    color: #fff;
+}
+
+.btn-whatsapp:hover {
+    background: #20bd5a;
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-youtube {
+    background: #FF0000;
+    color: #fff;
+}
+
+.btn-youtube:hover {
+    background: #cc0000;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+/* ===== Section 1 — Hero ===== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 2rem 1.5rem;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-color: var(--bg-black);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Hero — spiritual particles (gold + soft white, slow float) */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.hero-particles .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 30% 30%,
+        var(--particle-white),
+        var(--particle-gold) 40%,
+        transparent 70%
+    );
+    box-shadow:
+        0 0 15px var(--particle-gold),
+        0 0 30px var(--gold-glow-subtle);
+    opacity: 0.7;
+    will-change: transform;
+}
+
+.hero-particles .particle--float-1 {
+    animation: particleFloat1 var(--duration, 35s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+.hero-particles .particle--float-2 {
+    animation: particleFloat2 var(--duration, 42s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+.hero-particles .particle--float-3 {
+    animation: particleFloat3 var(--duration, 38s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+.hero-particles .particle--float-4 {
+    animation: particleFloat4 var(--duration, 45s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes particleFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    25% { transform: translate(3vw, -8vh) scale(1.1); opacity: 0.8; }
+    50% { transform: translate(-2vw, -15vh) scale(0.95); opacity: 0.5; }
+    75% { transform: translate(4vw, -6vh) scale(1.05); opacity: 0.75; }
+}
+
+@keyframes particleFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    33% { transform: translate(-5vw, 10vh) scale(1.15); opacity: 0.7; }
+    66% { transform: translate(3vw, 5vh) scale(0.9); opacity: 0.55; }
+}
+
+@keyframes particleFloat3 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.65; }
+    50% { transform: translate(6vw, -12vh) scale(1.08); opacity: 0.8; }
+}
+
+@keyframes particleFloat4 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.55; }
+    25% { transform: translate(-4vw, -5vh) scale(0.92); opacity: 0.7; }
+    50% { transform: translate(2vw, -18vh) scale(1.12); opacity: 0.5; }
+    75% { transform: translate(-3vw, -8vh) scale(1); opacity: 0.65; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-particles .particle {
+        animation: none;
+        opacity: 0.4;
+    }
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.4) 0%,
+        rgba(10, 10, 10, 0.7) 50%,
+        rgba(10, 10, 10, 0.95) 100%
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    text-shadow: 
+        0 0 20px var(--gold-glow),
+        0 0 40px var(--gold-glow-soft),
+        0 0 80px var(--gold-glow-subtle);
+    animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+    from { text-shadow: 0 0 20px var(--gold-glow), 0 0 40px var(--gold-glow-soft); }
+    to { text-shadow: 0 0 30px var(--gold-glow), 0 0 60px var(--gold-glow-soft), 0 0 100px var(--gold-glow-subtle); }
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    letter-spacing: 0.2em;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+}
+
+/* ===== Section 2 — Mensaje Espiritual ===== */
+.mensaje {
+    padding: 5rem 0;
+    background: var(--bg-black);
+}
+
+.mensaje-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mensaje-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    line-height: 1.9;
+}
+
+/* ===== Section 3 — Filosofía ===== */
+.filosofia {
+    padding: 5rem 0;
+    background: var(--bg-dark);
+}
+
+.filosofia-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto 0 0;
+}
+
+.filosofia-image-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.filosofia-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    vertical-align: middle;
+    mask-image: radial-gradient(
+        ellipse 75% 80% at 50% 50%,
+        black 30%,
+        transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+        ellipse 75% 80% at 50% 50%,
+        black 30%,
+        transparent 100%
+    );
+}
+
+.filosofia-content {
+    text-align: center;
+}
+
+.filosofia-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    line-height: 1.9;
+}
+
+/* ===== Section 4 — Servicios ===== */
+.servicios {
+    padding: 5rem 0;
+    background: var(--bg-black);
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 1px;
+    background: linear-gradient(135deg, transparent, var(--gold-glow-soft), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.service-card:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 30px var(--gold-glow-subtle);
+    transform: translateY(-4px);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+}
+
+.service-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.service-card .price {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--gold-light);
+    margin-bottom: 1.25rem;
+}
+
+.service-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.service-buttons .whatsapp-btn,
+.service-buttons .paypal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 140px;
+    padding: 0.75rem 1rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+}
+
+.service-buttons .whatsapp-btn {
+    background: #25D366;
+    color: #fff;
+}
+
+.service-buttons .whatsapp-btn:hover {
+    background: #20bd5a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+}
+
+.service-buttons .paypal-btn {
+    background: #d4af37;
+    color: #0a0a0a;
+}
+
+.service-buttons .paypal-btn:hover {
+    background: #e8c84a;
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+}
+
+/* ===== Section 5 — Pagos ===== */
+.pagos {
+    padding: 5rem 0;
+    background: var(--bg-dark);
+}
+
+.pagos-content {
+    text-align: center;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.pagos-content p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.pagos-email {
+    font-size: 1.25rem !important;
+    color: var(--gold) !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* ===== Section 6 — Perfil ===== */
+.perfil {
+    padding: 5rem 0;
+    background: var(--bg-black);
+}
+
+.perfil-content {
+    text-align: center;
+}
+
+.perfil-image-wrapper {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 
+        0 0 30px var(--gold-glow-subtle),
+        inset 0 0 20px rgba(212, 175, 55, 0.05);
+    transition: all 0.4s ease;
+}
+
+.perfil-image-wrapper:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 50px var(--gold-glow-soft);
+}
+
+.perfil-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.perfil-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.perfil-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* ===== Section 7 — Redes Sociales ===== */
+.redes {
+    padding: 5rem 0;
+    background: var(--bg-dark);
+}
+
+.redes-text {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.redes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease;
+}
+
+.social-btn svg {
+    flex-shrink: 0;
+    color: var(--gold);
+}
+
+.social-btn:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 25px var(--gold-glow-subtle);
+    transform: translateY(-2px);
+}
+
+.social-btn:hover svg {
+    color: var(--gold-light);
+}
+
+/* ===== Section 8 — Contacto ===== */
+.contacto {
+    padding: 5rem 0;
+    background: var(--bg-black);
+}
+
+.contacto-content {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contacto-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.contacto-content .contacto-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.contacto-content .contacto-buttons .btn {
+    margin-top: 0;
+    min-width: 280px;
+    flex: 1 1 280px;
+}
+
+/* ===== Floating WhatsApp ===== */
+.float-whatsapp {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.float-whatsapp:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+/* ===== Footer ===== */
+.footer {
+    padding: 2.5rem 0;
+    background: #050505;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.footer p {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* ===== Fade-in Animation (JS-triggered) ===== */
+.section-fade {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.section-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 100vh;
+    }
+
+    .hero-logo {
+        letter-spacing: 0.1em;
+    }
+
+    .hero-subtitle {
+        letter-spacing: 0.1em;
+    }
+
+    .mensaje,
+    .filosofia-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        margin: 0 auto;
+    }
+
+    .filosofia-image-wrap {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .filosofia-content {
+        text-align: center;
+    }
+
+    .filosofia,
+    .servicios,
+    .pagos,
+    .perfil,
+    .redes,
+    .contacto {
+        padding: 3.5rem 0;
+    }
+
+    .section-title {
+        margin-bottom: 1.75rem;
+    }
+
+    .servicios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-buttons {
+        flex-direction: column;
+    }
+
+    .service-buttons .whatsapp-btn,
+    .service-buttons .paypal-btn {
+        min-width: 100%;
+    }
+
+    .redes-grid {
+        flex-direction: column;
+    }
+
+    .social-btn {
+        justify-content: center;
+    }
+
+    .perfil-image-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+
+    .float-whatsapp {
+        width: 54px;
+        height: 54px;
+        bottom: 1.25rem;
+        right: 1.25rem;
+    }
+
+    .float-whatsapp svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 0.9rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .mensaje-content p,
+    .filosofia-content p {
+        font-size: 1rem;
+    }
+}
